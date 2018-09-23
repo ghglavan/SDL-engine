@@ -1,24 +1,21 @@
-#include "init.h"
-#include <SDL2/SDL.h>
+#include "Game.h"
 
-bool g_bRunning = false;
+Game *g_game = nullptr;
 
-int main(int argc, char *args[])
+int main(int argc, char *argv[])
 {
-	if (init("Hello SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640,
-			 480, SDL_WINDOW_SHOWN))
+	g_game = new Game();
+
+	g_game->init("Hello", 100, 100, 640, 480, 0);
+
+	while (g_game->running())
 	{
-		g_bRunning = true;
-	}
-	else
-	{
-		return 1;
-	}
-	while (g_bRunning)
-	{
-		render();
+		g_game->handleEvents();
+		g_game->update();
+		g_game->render();
 	}
 
-	SDL_Quit();
+	g_game->clean();
+
 	return 0;
 }
