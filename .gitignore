@@ -1,1 +1,4 @@
-/build/*
+/bin/*
+/lib/*
+/cmake/*
+!/cmake/CMakeLists.txt
